@@ -2,6 +2,7 @@ package dev.benfan.service;
 
 import dev.benfan.models.Product;
 import dev.benfan.models.ProductQueryParameter;
+import dev.benfan.models.ProductRequest;
 import dev.benfan.repository.ProductRepository;
 import jakarta.ws.rs.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class ProductService {
                 .orElseThrow(() -> new NotFoundException("Can't find product."));
     }
 
-    public Product createProduct(Product request){
+    public Product createProduct(ProductRequest request){
         Product product = new Product();
         product.setName(request.getName());
         product.setPrice(request.getPrice());

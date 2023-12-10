@@ -1,11 +1,15 @@
 package dev.benfan.models;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "product")
 public class Product {
     private String id;
+    @NotEmpty(message = "name should be not empty")
     private String name;
+    @Min(value = 0, message = "Price should be greater or equal to 0.")
     private int price;
 
     public String getOldid() {

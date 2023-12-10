@@ -2,7 +2,9 @@ package dev.benfan.controller;
 
 import dev.benfan.models.Product;
 import dev.benfan.models.ProductQueryParameter;
+import dev.benfan.models.ProductRequest;
 import dev.benfan.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     @PostMapping("/createProducts")
-    public Product CreateProduct(@RequestBody Product request){
+    public Product CreateProduct(@Valid@RequestBody ProductRequest request){
         return productService.createProduct(request);
     }
     @PostMapping("/GetProductsByPrice")
