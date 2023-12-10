@@ -1,6 +1,8 @@
 package dev.benfan;
 
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
@@ -10,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
 @Configuration
-@EnableDynamoDBRepositories
-public class Dynamodb {
+@EnableDynamoDBRepositories(basePackages = "dev.benfan.repository")
+public class DynamoDBConfig {
     @Value("${amazon.dynamodb.endpoint}")
     private String amazonDynamoDBEndpoint;
 
@@ -20,10 +22,12 @@ public class Dynamodb {
 
     @Value("${amazon.aws.secretkey}")
     private String amazonAWSSecretKey;
+
     @Bean
     public AmazonDynamoDB amazonDynamoDB(){
         AmazonDynamoDB amazonDynamoDB
                 = new AmazonDynamoDBClient(amazonAWSCredentials());
+        amazonDynamoDB.setRegion(Region.getRegion(Regions.AP_NORTHEAST_1));
         if (!StringUtils.isEmpty(amazonDynamoDBEndpoint)) {
             amazonDynamoDB.setEndpoint(amazonDynamoDBEndpoint);
         }

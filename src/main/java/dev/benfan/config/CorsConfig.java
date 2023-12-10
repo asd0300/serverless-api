@@ -15,7 +15,7 @@ public class CorsConfig implements WebMvcConfigurer {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/goods/**").   //可以被跨域的路径,/**表示无限制,
+                registry.addMapping("/**").   //可以被跨域的路径,/**表示无限制,
                         allowedOrigins(ALLOWED_ORIGINS). //允许跨域的域名，如果值为*,则表示允许任何域名使用
                         allowedMethods("*"). //允许任何方法，值可以为： "GET", "POST" ...
                         allowedHeaders("*"). //允许任何请求头

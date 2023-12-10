@@ -1,4 +1,4 @@
-package dev.benfan.Band;
+package dev.benfan.controller;
 import com.google.gson.Gson;
 import dev.benfan.models.BandInfo;
 import dev.benfan.repository.BandRepository;
