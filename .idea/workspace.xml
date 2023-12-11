@@ -10,12 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="988a9d72-c678-4ebd-be3f-a52f7b90c9e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/convert/ProductConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/models/ProductRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/models/AppUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/models/UserAuthority.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/service/CrawlerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/service/MailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/service/UserDetailsServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/benfan/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/benfan/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/benfan/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/benfan/service/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +33,7 @@
       <list>
         <option value="Record" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -65,10 +71,11 @@
       <recent name="$PROJECT_DIR$/src/test/java" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="dev.benfan.service" />
       <recent name="dev.benfan.controller" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Application">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dev.benfan.Application" />
       <module name="serverless-api" />
@@ -82,9 +89,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ProductTest.testCreateProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="serverless-api" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ProductTest" />
+      <option name="METHOD_NAME" value="testCreateProduct" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Application" />
+        <item itemvalue="JUnit.ProductTest.testCreateProduct" />
       </list>
     </recent_temporary>
   </component>
@@ -109,18 +127,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dev/benfan/controller/ProductController.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dev/benfan/controller/ProductController.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dev/benfan/controller/ProductController.java</url>
-          <line>39</line>
+          <line>43</line>
           <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dev/benfan/controller/ProductController.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dev/benfan/service/CrawlerService.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

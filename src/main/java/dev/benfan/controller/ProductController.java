@@ -3,12 +3,14 @@ package dev.benfan.controller;
 import dev.benfan.models.Product;
 import dev.benfan.models.ProductQueryParameter;
 import dev.benfan.models.ProductRequest;
+import dev.benfan.service.CrawlerService;
 import dev.benfan.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -16,8 +18,10 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CrawlerService crawlerService;
     @PostMapping("/createProducts")
-    public Product CreateProduct(@Valid@RequestBody ProductRequest request){
+    public Product CreateProduct(@Valid @RequestBody ProductRequest request){
         return productService.createProduct(request);
     }
     @PostMapping("/GetProductsByPrice")
@@ -38,5 +42,9 @@ public class ProductController {
     public void DeleteProdcut(@RequestBody Product request){
         String id = request.getId();
         productService.deleteProduct(id);
+    }
+    @GetMapping("/Crawler")
+    public void CrawlerStart() throws IOException {
+        crawlerService.StartCrawler();
     }
 }
