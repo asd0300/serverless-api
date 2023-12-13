@@ -9,7 +9,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.util.List;
 
@@ -44,7 +47,7 @@ public class ProductController {
         productService.deleteProduct(id);
     }
     @GetMapping("/Crawler")
-    public void CrawlerStart() throws IOException {
+    public void CrawlerStart() throws IOException, XPathExpressionException, ParserConfigurationException, SAXException {
         crawlerService.StartCrawler();
     }
 }

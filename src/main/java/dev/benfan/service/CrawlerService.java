@@ -3,6 +3,7 @@ package dev.benfan.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.benfan.models.CrawlerNews;
 import dev.benfan.models.Product;
 import dev.benfan.models.ProductQueryParameter;
 import dev.benfan.models.ProductRequest;
@@ -15,9 +16,17 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 @Service
 public class CrawlerService {
@@ -69,18 +78,16 @@ public class CrawlerService {
 //        }
 //        return sort;
 //    }
-    public void StartCrawler() throws IOException{
+    public void StartCrawler() throws IOException, XPathExpressionException, ParserConfigurationException, SAXException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\"head\":{\"cid\":\"03170106361347044351\",\"cver\":\"6.4.5\",\"sver\":\"6.4.5\",\"lang\":\"zh\",\"sid\":\"5\",\"syscode\":\"04\",\"auth\":null,\"pid\":\"42\",\"transactionid\":\"h20231127212024f\",\"channel\":\"MWEB\"},\"data\":{\"baseRequest\":{\"journeyType\":\"OneWay\",\"cabinType\":\"Any\",\"fromCityCode\":\"TPE\",\"toCityCode\":\"TYO\",\"outboundDate\":\"2023-11-28\",\"inboundDate\":\"2024-01-02\",\"passengers\":[{\"type\":\"Adult\",\"quantity\":1}],\"fromAirportCode\":\"\",\"toAirportCode\":\"\",\"airlineCode\":\"\",\"isDirectFlight\":false,\"resourceType\":\"Ct\"},\"outboundToken\":\"\",\"routeSearchToken\":\"\",\"union\":{\"allianceID\":\"101\",\"sid\":\"1\",\"ouid\":\"www.google.com\",\"metaSource\":\"\",\"metaTag\":null,\"metaTime\":null}}}");
         Request request = new Request.Builder()
                 .url("https://www.setn.com/ViewAll.aspx?PageGroupID=7")
-                .method("POST", body)
+                .method("GET", null)
                 .addHeader("Accept", "application/json")
                 .addHeader("Appid", "10102")
                 .addHeader("Content-Type", "application/json")
-                .addHeader("Referer", "https://flight.eztravel.com.tw/")
                 .addHeader("Sec-Ch-Ua", "\"Google Chrome\";v=\"117\", \"Not;A=Brand\";v=\"8\", \"Chromium\";v=\"117\"")
                 .addHeader("Sec-Ch-Ua-Mobile", "?1")
                 .addHeader("Sec-Ch-Ua-Platform", "\"Android\"")
@@ -88,37 +95,21 @@ public class CrawlerService {
                 .build();
         Response response = client.newCall(request).execute();
         var okbody = response.body().string();
-//        var resultData = DataFetch(okbody);
+        var resultData = DataFetch(okbody);
 //        return resultData;
     }
 
-//    private ArrayList<FlightInfo> DataFetch(String okbody) throws JsonProcessingException {
-//        ArrayList<FlightInfo> flightInfoList = new ArrayList<FlightInfo>() {
-//        };
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        JsonNode jsonNode = objectMapper.readTree(okbody);
-//        var ListJson = jsonNode.at("/data/routings");
-//        for(JsonNode jsonNode1: ListJson){
-//            FlightInfo flightInfo = new FlightInfo();
-//            flightInfo.Notes = jsonNode1.get("basic").get("ticketingDesc").asText();
-//            flightInfo.FeeWithTax = jsonNode1.get("price").get("averagePrice").asInt();
-//            var ListJson2 = jsonNode1.get("sector");
-//            for(JsonNode jsonNode2: ListJson2){
-//
-//                var test1 = jsonNode2.get("airline");
-//                flightInfo.FlightCompany = test1.get("name").asText();
-//                flightInfo.FlightNo = jsonNode2.get("flightNumber").asText();
-//                flightInfo.StartTime = jsonNode2.get("goTime").get("datetime").asText();
-//                flightInfo.StartTerminal = jsonNode2.get("fromAirport").get("name").asText() +" " + jsonNode2.get("fromAirport").get("terminal").asText();
-//                flightInfo.ArriveTime = jsonNode2.get("toTime").get("datetime").asText();
-//                flightInfo.ArriveTerminal = jsonNode2.get("toAirport").get("name").asText() +" " + jsonNode2.get("toAirport").get("terminal").asText();
-//                flightInfo.DuringTime = jsonNode2.get("duration").asText();
-//                flightInfo.FlightClass = jsonNode2.get("cabinTypeName").asText();
-//
-//                System.out.println("123");
-//                flightInfoList.add(flightInfo);
-//            }
-//        }
+    private ArrayList<CrawlerNews> DataFetch(String okbody) throws IOException, ParserConfigurationException, SAXException, XPathExpressionException {
+        Document doc = null;
+        XPath xPath = null;
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = builderFactory.newDocumentBuilder();
+        Document xmlDocument = builder.parse(okbody);
+        XPathFactory factory = XPathFactory.newInstance();
+        xPath=factory.newXPath();
+        String expression = "//div[contains(@class,\"NewsList\")]//h3[contains(@class,\"title\")]/a";
+        NodeList nodeList=(NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
 //        return flightInfoList;
-//    }
+        return null;
+    }
 }
